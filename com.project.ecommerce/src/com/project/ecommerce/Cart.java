@@ -73,7 +73,7 @@ public class Cart {
 			try
 			{
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 				PreparedStatement ps1=con.prepareStatement("select Quantity from products where productID=?");
 				ps1.setString(1, Integer.toString(p_id));
 				ResultSet rs=ps1.executeQuery();
@@ -104,7 +104,7 @@ public class Cart {
 			int prevq=0;
 			int newq=0;
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/onlineshop?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("update products set Quantity=? where productId=?");
 			int x;
 			int y;

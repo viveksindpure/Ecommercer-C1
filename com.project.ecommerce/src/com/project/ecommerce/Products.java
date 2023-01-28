@@ -57,20 +57,10 @@ public class Products {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("select * from products");
 			ResultSet rs=ps.executeQuery();
-			//*******
-			//for counting the number of rows in result set
-			if(rs.last()) {
-				x=rs.getRow();
-				rs.beforeFirst();
-			}
-			//*******
-			if(x==0)
-				System.out.println("NO PRODUCTS AVAIALABLE");
-			else
-			{
+
 				do
 				{
 					System.out.print("enter product ID to update info : ");
@@ -154,7 +144,7 @@ public class Products {
 					rs.beforeFirst();
 			}while(chd1.equalsIgnoreCase("Y"));
 		}
-		}
+	
 		catch(Exception e)
 		{
 			System.out.println(e);
@@ -169,20 +159,10 @@ public class Products {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("select * from products");
 			ResultSet rs=ps.executeQuery();
-			//*******
-			//for counting the number of rows in result set
-			if(rs.last()) {
-				x=rs.getRow();
-				rs.beforeFirst();
-			}
-			//*******
-			if(x==0)
-				System.out.println("NO PRODUCTS AVAIALABLE");
-			else
-			{
+	
 				do
 				{
 					System.out.println("Enter product ID to search : ");
@@ -209,7 +189,7 @@ public class Products {
 					System.out.print("Do you want to continue, press Y for 'yes' N for 'no' : ");
 					ch=br.readLine();
 				}while(ch.equalsIgnoreCase("Y"));
-			}
+		
 			
 		}
 		catch(Exception e)
@@ -227,7 +207,7 @@ public class Products {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("delete from products where productID=?");
 			do
 			{
@@ -259,7 +239,7 @@ public class Products {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("insert into products(productID,Name,Type,Quantity,Price) values(?,?,?,?,?)");
 			do
 			{
@@ -296,22 +276,9 @@ public class Products {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("select * from products");
 			ResultSet rs=ps.executeQuery();
-			//*******
-			//for counting the number of rows in result set
-			if(rs.last()) {
-				x=rs.getRow();
-				rs.beforeFirst();
-			}
-			//*******
-			if(x==0)
-			{
-				System.out.println("NO PRODUCTS AVAIALABLE !");
-			}
-			else
-			{
 				System.out.println("The products are : \n");
 				System.out.println("****************************************************************************************************************************\n");
 				System.out.printf("%-15s \t %-20s \t %-20s \t %-15s \t %-15s\n","Product ID","Name","Type","Quantity","Price");
@@ -326,7 +293,7 @@ public class Products {
 					System.out.printf("%-15d \t %-20s \t %-20s \t %-15d \t %-15f\n",pid,name,type,qty,price);
 				}
 				System.out.println("****************************************************************************************************************************\n");
-			}
+
 		}
 		catch(Exception e)
 		{
@@ -339,7 +306,7 @@ public class Products {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("select productID from products");
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())

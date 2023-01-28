@@ -67,7 +67,7 @@ public class Admin extends Shop {
 			int x=0;
 			String chc;
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 			String s="";
 			int fc=-1;
@@ -206,24 +206,10 @@ public class Admin extends Shop {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("select * from custinfo");
 			ResultSet rs=ps.executeQuery();
-			//*******
-			//for counting the number of rows in result set
-			if(rs.last())
-			{
-				x=rs.getRow();
-				rs.beforeFirst();
-			}
-			//*******
-			if(x==0)
-				System.out.println("NO CUSTOMERS AVAIALABLE");
-			else
-			{
-				System.out.println("**********************************************************************************************************************************************************************\n");
-				System.out.printf("%-20s \t %-20s \t %-10s \t %-20s \t %-30s \t %-20s\n","CUSTOMER_ID","NAME","AGE","EMAIL","ADDRESS","CONTACT_NUMBER");
-				System.out.println("**********************************************************************************************************************************************************************\n");
+			
 				while(rs.next())
 				{
 					cid=Integer.parseInt(rs.getString(1));
@@ -235,7 +221,7 @@ public class Admin extends Shop {
 					System.out.printf("%-20d \t %-20s \t %-10d \t %-20s \t %-30s \t %-20s\n",cid,name,age,email,addr,contact);
 				}
 				System.out.println("*********************************************************************************************************************************************************************\n");
-			}
+		
 			
 		}
 		catch(Exception e)
@@ -256,21 +242,10 @@ public class Admin extends Shop {
 			try
 			{
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 				PreparedStatement ps=con.prepareStatement("select * from custinfo");
 				ResultSet rs=ps.executeQuery();
 				
-				//for counting number of rows in result set
-				if(rs.last())
-				{
-					x=rs.getRow();
-					rs.beforeFirst();
-				}
-				
-				if(x==0)
-					System.out.println("NO CUSTOMERS AVAILABLE");
-				else
-				{
 					System.out.println("Enter customer ID to delete");
 					cid=Integer.parseInt(br.readLine());
 					PreparedStatement ps1=con.prepareStatement("delete from custinfo where custID=?");
@@ -283,8 +258,7 @@ public class Admin extends Shop {
 						System.out.println("CUSTOMER INFO DELETED SUCCESSFULLY !");
 					else
 						System.out.println("CUSTOMER INFO NOT FOUND !");
-					
-				}
+			
 			}
 			catch(Exception e)
 			{

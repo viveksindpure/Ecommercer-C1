@@ -11,7 +11,7 @@ public class Shop {
 	static int UID;
 	static int CUID;
 	public static void main(String[] args) throws IOException {
-		DatabaseConnection.makeDatabase();
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("WELCOME TO ONLINE SHOPPINT SYSYEM\n");
 		int ch;
@@ -51,7 +51,7 @@ public class Shop {
 				String passw;
 				char tp=' ';
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 				PreparedStatement ps = con.prepareStatement("select * from logininfo");
 				ResultSet rs=ps.executeQuery();
 				while(rs.next()) {
@@ -59,9 +59,7 @@ public class Shop {
 					pass.add(rs.getString("password"));
 					type.add((rs.getString("userType")).charAt(0));
 				}
-				/*System.out.println(id);
-				System.out.println(pass);
-				System.out.println(type);*/
+				
 				int flag1=0,flag2=0;
 				int f1,f2;
 				do {
@@ -134,7 +132,7 @@ public class Shop {
 			try 
 			{
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 				PreparedStatement ps = con.prepareStatement("insert into adminInfo(AdminID,Name,Age,Email,Address,ContactNumber) values(?,?,?,?,?,?)");
 				PreparedStatement ps1 = con.prepareStatement("insert into loginInfo(userID,password,userType) values(?,?,?)");
 				ps.setString(1, Integer.toString(UID));
@@ -185,7 +183,8 @@ public class Shop {
 			try
 			{
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);				PreparedStatement ps=con.prepareStatement("insert into custInfo(CustID,Name,Age,Email,Address,ContactNumber) values(?,?,?,?,?,?)");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");				
+				PreparedStatement ps=con.prepareStatement("insert into custInfo(CustID,Name,Age,Email,Address,ContactNumber) values(?,?,?,?,?,?)");
 				PreparedStatement ps1=con.prepareStatement("insert into loginInfo(userID,password,userType) values(?,?,?)");
 				ps.setString(1, Integer.toString(CUID));
 				ps.setString(2, name);
@@ -214,7 +213,7 @@ public class Shop {
 			try 
 			{
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 				PreparedStatement ps=con.prepareStatement("select custID from custinfo");
 				ResultSet rs=ps.executeQuery();
 				int x=199;
@@ -234,7 +233,7 @@ public class Shop {
 			{
 
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 				PreparedStatement ps=con.prepareStatement("select AdminID from adminInfo");
 				ResultSet rs=ps.executeQuery();
 				int x = 99;

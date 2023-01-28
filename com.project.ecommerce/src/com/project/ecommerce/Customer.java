@@ -129,7 +129,7 @@ public class Customer extends Shop {
 			try
 			{
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 				PreparedStatement ps=con.prepareStatement("Select * from custinfo where custID=?");
 				ps.setString(1, Integer.toString(customerID));
 				ResultSet rs=ps.executeQuery();
@@ -195,7 +195,7 @@ public class Customer extends Shop {
 				qty.set(res, 0);
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("update products set Quantity=? where productID=?");
 			ps.setString(1, Integer.toString(qty.get(res)));
 			ps.setString(2, Integer.toString(x));
@@ -255,21 +255,10 @@ public class Customer extends Shop {
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("select * from products");
 			ResultSet rs=ps.executeQuery();
 			
-			//for counting the number of rows in result set
-			if(rs.last()) {
-				x=rs.getRow();
-				//System.out.println("Row get="+x);
-				rs.beforeFirst();
-			}
-			
-			if(x==0)
-				return 0;
-			else
-			{
 				while(rs.next())
 				{
 					pid.add(Integer.parseInt(rs.getString(1)));
@@ -277,9 +266,8 @@ public class Customer extends Shop {
 					type.add(rs.getString(3));
 					qty.add(Integer.parseInt(rs.getString(4)));
 					price.add(Float.parseFloat(rs.getString(5)));
-				}
-			}
 			
+		}
 		}
 		catch(Exception e)
 		{
@@ -289,10 +277,6 @@ public class Customer extends Shop {
 	}
 	private void viewProducts()throws IOException
 	{
-		if(products_Check==0)
-			System.out.println("PRODUCTS NOT AVAILABLE !");
-		else
-		{
 			int x;
 			x=pid.size();
 			int i;
@@ -307,14 +291,10 @@ public class Customer extends Shop {
 					System.out.printf("%-20d \t %-20s \t %-20s \t %-20s \t %-20f\n",pid.get(i),name.get(i),type.get(i),"NOT IN STOCK",price.get(i) );
 			}
 			System.out.println("***********************************************************************************************************************\n");
-		}
+
 	}
 	private void searchNameWise()throws IOException
 	{
-		if(products_Check==0)
-			System.out.println("PRODUCTS NOT AVAILABLE !");
-		else
-		{
 			BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 			String sr;
 			int res;
@@ -324,33 +304,22 @@ public class Customer extends Shop {
 				System.out.print("ENTER PRODUCT NAME TO SEARCH : ");
 				sr=br.readLine();
 				res=name.indexOf(sr);
-				if(res==-1)
-					System.out.println("PRODUCT NOT FOUND !");
-				else
-				{
-					System.out.println("PRODUCT DETAILS ARE :\n");
-					System.out.printf("PRODUCT ID         = %-5d\n",pid.get(res));
-					System.out.printf("PRODUCT NAME       = %-20s\n",name.get(res));
-					System.out.printf("PRODUCT TYPE       = %-20s\n", type.get(res));
-					if(qty.get(res)!=0)
-						System.out.printf("QUANTITY AVAILABLE = %-5d\n", qty.get(res));
-					else
+		System.out.println("PRODUCT DETAILS ARE :\n");
+					System.out.printf("PRODUCT ID         = ",pid.get(res));
+					System.out.printf("PRODUCT NAME       = ",name.get(res));
+					System.out.printf("PRODUCT TYPE       = ", type.get(res));
 						System.out.printf("QUANTITY AVAILABLE = %-5s\n", "NOT IN STOCK");
 					System.out.printf("PRODUCT PRICE      = %-10f\n",price.get(res));
-				}
+				
 				System.out.print("PRESS Y to continue , N for exit : ");
 				chc=br.readLine();
 			
 			}while(chc.equalsIgnoreCase("Y"));
 			
-		}
+
 	}
 	private void searchTypeWise()throws IOException
 	{
-		if(products_Check==0)
-			System.out.println("PRODUCTS NOT AVAILABLE !");
-		else
-		{
 			BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 			String sr;
 			int res;
@@ -360,10 +329,6 @@ public class Customer extends Shop {
 				System.out.print("ENTER PRODUCT TYPE TO SEARCH : ");
 				sr=br.readLine();
 				res=type.indexOf(sr);
-				if(res==-1)
-					System.out.println("PRODUCT NOT FOUND !");
-				else
-				{
 					System.out.println("PRODUCTS AVAILABLE ARE : \n");
 					System.out.println("***********************************************************************************************************************\n");
 					System.out.printf("%-20s \t %-20s \t %-20s \t %-20s \t %-20s\n", "Product_ID","Product_Name","Product_Type","Product_Quantity","Product_Price");
@@ -380,12 +345,12 @@ public class Customer extends Shop {
 						}
 					}
 					System.out.println("***********************************************************************************************************************\n");
-				}
+				
 				System.out.print("PRESS Y to continue , N for exit : ");
 				chc=br.readLine();
 			
 			}while(chc.equalsIgnoreCase("Y"));
-		}
+
 	}
 	private static void editProfile(int custID)throws IOException
 	{
@@ -394,7 +359,7 @@ public class Customer extends Shop {
 			int x=0;
 		String chc;
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 		String s="";
 		int fc=-1;

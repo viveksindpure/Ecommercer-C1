@@ -40,23 +40,7 @@ public class Bill {
 			sum=sum+price.get(i);
 		}
 		total_amount=sum;
-		/*try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/onlineshop?autoReconnect=true&useSSL=false","root","mohit2001");
-			PreparedStatement ps=con.prepareStatement("insert into bills(bill_id,cust_name,bill_addr,total_amt) values(?,?,?,?)");
-			ps.setString(1, Integer.toString(bill_id));
-			ps.setString(2,cust_name);
-			ps.setString(3, bill_addr);
-			ps.setString(4, Float.toString(total_amount));
-		    x=ps.executeUpdate();
-			if(x==0)
-				System.out.println("BILL ADDED TO DATABASE !");
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-		}*/
+		
 	}
 	private static int setBillId()throws IOException
 	{
@@ -64,7 +48,7 @@ public class Bill {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("select bill_id from bills");
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
@@ -105,7 +89,7 @@ public class Bill {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/onlineshop?autoReconnect=true&useSSL=false","root",DatabaseConnection.root);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","root");
 			PreparedStatement ps=con.prepareStatement("insert into bills(bill_id,cust_name,bill_addr,total_amt) values(?,?,?,?)");
 			ps.setString(1, Integer.toString(bill_id));
 			ps.setString(2,cust_name);
