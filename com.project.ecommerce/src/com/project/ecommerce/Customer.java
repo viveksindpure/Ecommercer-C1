@@ -304,11 +304,12 @@ public class Customer extends Shop {
 				System.out.print("ENTER PRODUCT NAME TO SEARCH : ");
 				sr=br.readLine();
 				res=name.indexOf(sr);
-		System.out.println("PRODUCT DETAILS ARE :\n");
-					System.out.printf("PRODUCT ID         = ",pid.get(res));
-					System.out.printf("PRODUCT NAME       = ",name.get(res));
-					System.out.printf("PRODUCT TYPE       = ", type.get(res));
-						System.out.printf("QUANTITY AVAILABLE = %-5s\n", "NOT IN STOCK");
+				System.out.println("PRODUCT DETAILS ARE :\n");
+				System.out.printf("PRODUCT ID         = %-5d\n",pid.get(res));
+				System.out.printf("PRODUCT NAME       = %-20s\n",name.get(res));
+				System.out.printf("PRODUCT TYPE       = %-20s\n", type.get(res));
+
+					System.out.printf("QUANTITY AVAILABLE = %-5s\n", qty.get(res));
 					System.out.printf("PRODUCT PRICE      = %-10f\n",price.get(res));
 				
 				System.out.print("PRESS Y to continue , N for exit : ");
