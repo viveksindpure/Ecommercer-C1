@@ -251,18 +251,18 @@ public class Admin extends Shop {
 					PreparedStatement ps1=con.prepareStatement("delete from custinfo where custID=?");
 					PreparedStatement ps2=con.prepareStatement("delete from logininfo where userID=?");
 					ps1.setString(1, Integer.toString(cid));
-					ps2.setString(2, Integer.toString(cid));
+					ps2.setString(1, Integer.toString(cid));
 					x=ps1.executeUpdate();
 					y=ps2.executeUpdate();
-					if(x!=0 && y!=0)
+//					if(x!=0 && y!=0)
 						System.out.println("CUSTOMER INFO DELETED SUCCESSFULLY !");
-					else
-						System.out.println("CUSTOMER INFO NOT FOUND !");
-			
+////					else
+//			System.out.println("CUSTOMER INFO NOT FOUND !");
+//			
 			}
 			catch(Exception e)
 			{
-				e.printStackTrace();
+				System.out.println(e);
 			}		
 			
 		}

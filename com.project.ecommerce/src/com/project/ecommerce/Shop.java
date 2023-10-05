@@ -13,7 +13,7 @@ public class Shop {
 	public static void main(String[] args) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("WELCOME TO ONLINE SHOPPINT SYSYEM\n");
+		System.out.println("WELCOME TO E-Store \n");
 		int ch;
 		do {
 			System.out.println("*****************************************************\n");
